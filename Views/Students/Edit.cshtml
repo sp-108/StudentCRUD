@@ -1,0 +1,62 @@
+﻿@model StudentCRUD.Models.Student
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0 col-md-7 col-lg-6 mx-auto">
+
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">✏ Edit Student Details</h4>
+        </div>
+
+        <div class="card-body">
+
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImagePath" />
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label fw-semibold"></label>
+                <input asp-for="Name" class="form-control form-control-lg" />
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Course" class="form-label fw-semibold"></label>
+                <input asp-for="Course" class="form-control form-control-lg" />
+                <span asp-validation-for="Course" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Age" class="form-label fw-semibold"></label>
+                <input asp-for="Age" class="form-control form-control-lg" />
+                <span asp-validation-for="Age" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Change Photo</label>
+                <input type="file" asp-for="ImageFile" class="form-control form-control-lg" accept="image/*" />
+            </div>
+            @if (Model.ImagePath != null)
+            {
+                <div class="mb-2">
+                    <p>Current Photo:</p>
+                    <img src="~/images/@Model.ImagePath" class="rounded shadow-sm" width="120" />
+                </div>
+            }
+
+                <div class="d-grid gap-2 mt-3">
+                    <button type="submit" class="btn btn-warning btn-lg">Update Student</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+
+        </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

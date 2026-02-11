@@ -1,0 +1,53 @@
+﻿@model StudentCRUD.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container mt-4">
+
+    ```
+    <div class="card shadow-lg border-0 col-md-7 col-lg-6 mx-auto">
+
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">👤 Student Details</h4>
+        </div>
+
+        <div class="card-body text-center">
+
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <div class="mb-3">
+                    <img src="~/images/@Model.ImagePath" class="rounded-circle shadow-sm" width="150" height="150" style="object-fit:cover;" />
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No Image Available</p>
+            }
+
+            <h4 class="fw-bold">@Model.Name</h4>
+
+            <p class="text-muted mb-1">
+                <strong>Course:</strong> @Model.Course
+            </p>
+
+            <p class="text-muted mb-3">
+                <strong>Age:</strong> @Model.Age
+            </p>
+
+            <div class="d-grid gap-2 mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg">
+                    Edit Student
+                </a>
+
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    Back to List
+                </a>
+            </div>
+
+        </div>
+    </div>
+    ```
+
+</div>

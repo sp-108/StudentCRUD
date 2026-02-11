@@ -1,0 +1,81 @@
+﻿@model IEnumerable<StudentCRUD.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="p-3 mb-2 bg-success text-white">
+
+    <h2 class="fw-bold text-dark mb-1">
+        🎓 Student Record Management
+    </h2>
+
+    <p class="text-muted mb-0">
+        Manage student records, add new students, edit details and remove data easily.
+    </p>
+
+</div>
+
+
+<div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+    <h2 class="text-primary fw-bold">🎓 Student Dashboard</h2>
+
+    <a asp-action="Create" class="btn btn-success">
+        + Add Student
+    </a>
+</div>
+
+<table class="table table-hover table-bordered align-middle">
+    <thead class="table-secondary text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>Photo</th>
+            <th width="220">Action</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course)
+            </td>
+            <td>
+                 <span class="badge bg-info text-dark fs-6">
+                      @item.Age
+                 </span>
+            </td>
+
+            <td>
+                 @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="~/images/@item.ImagePath"
+                             class="rounded shadow-sm"
+                             width="70" height="70"
+                             style="object-fit:cover;" />
+
+                    }
+                  else
+                    {
+                        <span>No Image</span>
+                    }
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm text-white">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
